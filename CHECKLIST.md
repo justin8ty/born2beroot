@@ -75,7 +75,7 @@ If hostname isn't updated on restart, evaluation stops here.
 	sudo hostnamectl set-hostname new_hostname
 	sudo reboot
 	```
-- [ ] Explain how to view the partitions for the VM.
+- [ ] Explain how to view partitions for the VM.
 	`lsblk`
 - [ ] Compare output with example in PDF.
 - [ ] Explain LVM and how it works.
