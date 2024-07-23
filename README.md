@@ -1,4 +1,4 @@
-# born2beroot Walkthrough
+# Born2beRoot Tutorial
 
 ## Install VM
 
@@ -16,7 +16,7 @@ Set storage to 12GB, or 30GB for bonus
 
 A program to enable users to run programs using privileges of superuser.
 
-A user can access this when added to sudo permission group.
+A user can access sudo when added to sudo permission group.
 
 Each group have its own GID.
 
@@ -24,21 +24,26 @@ Each group have its own GID.
 
 For `permitrootlogin`:
 
-`prohibit-password`: Allows root login via keys, but not passwords.
-
-`no`: Disables root login entirely.
+| Option              | Description                                    |
+|---------------------|------------------------------------------------|
+| `prohibit-password` | Allows root login via keys, but not passwords. |
+| `no`                | Disables root login entirely.                  |
 
 From this point onward, we can use SSH to configure the VM from host machine.
 
 Connect with SSH:
 
-`ssh jin-tan@localhost -p 4242`
+```
+ssh jin-tan@localhost -p 4242
+```
+
+exit or Ctrl+D to disconnect.
 
 ### UFW Policies
 
 A CLI frontend for configuring iptables.
 
-**iptables <-> ufw examples**
+**Iptables <-> UFW Examples**
 
 Allow Port:
 
@@ -56,219 +61,72 @@ Sudoers file handles privilege escalation policies. Use visudo for syntax-safe e
 
 `sudo visudo`
 
-Changes:
-
-`Defaults passwd_tries=3`
-
-Sets a limit of 3 password attempts before locking out.
-
-`Defaults badpass_message="Wrong password. Please try again."`
-
-Customizes the error message for incorrect passwords.
-
-`Defaults logfile="/var/log/sudo/sudo.log"`
-
-Specifies the log file location for sudo activities.
-
-`Defaults log_input, log_output`
-
-Logs both input and output of sudo commands.
-
-`Defaults requiretty`
-
-Requires sudo to be run from a terminal.
-
-`Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"`
-
-Excludes folders from sudo.
+| Configuration                    | Description                                             |
+|----------------------------------|---------------------------------------------------------|
+| `Defaults passwd_tries=3`        | Sets a limit of 3 password attempts before locking out. |
+| `Defaults badpass_message=""`    | Customizes the error message for incorrect passwords.   |
+| `Defaults logfile="/sudo.log"`   | Specifies the log file location for sudo activities.    |
+| `Defaults log_input, log_output` | Logs both input and output of sudo commands.            |
+| `Defaults requiretty`            | Requires sudo to be run from a terminal.                |
+| `Defaults secure_path=""`        | Specifies a secure PATH for sudo.                       |
 
 ## Password Policies
 
-For `login.defs`:
+For `login.defs` (Age Policies):
 
-PASS_MAX_DAYS: It's the max days till password expiration.
+| Policies      | Description                            |
+|---------------|----------------------------------------|
+| PASS_MAX_DAYS | The max days till password expiration. |
+| PASS_MIN_DAYS | The min days till password change.     |
+| PASS_WARN_AGE | The days till password warning.        |
 
-PASS_MIN_DAYS: It's the min days till password change.
+For PAM (Strength Policies):
 
-PASS_WARN_AGE: It's the days till password warning.
+| Policies         | Description                                                                                               |
+|------------------|-----------------------------------------------------------------------------------------------------------|
+| minlen=10        | The minimum characters a password must contain.                                                           |
+| ucredit=-1       | The password must contain at least one capital letter. The negative sign indicates a minimum requirement. |
+| dcredit=-1       | The password must contain at least one digit.                                                             |
+| lcredit=-1       | The password must contain at least one lowercase letter.                                                  |
+| maxrepeat=3      | The password cannot have the same character repeated three consecutive times.                             |
+| reject_username  | The password cannot contain the username within itself.                                                   |
+| difok=7          | The password must contain at least seven different characters from the last password used.                |
+| enforce_for_root | This password policy will be enforced for the root user.                                                  |
 
-For PAM:
-
-minlen=10 ➤ The minimun characters a password must contain.
-
-ucredit=-1 ➤ The password at least have to contain a capital letter. We must write it with a - sign, as is how it knows that's refering to minumum caracters; if we put a + sign it will refer to maximum characters.
-
-dcredit=-1 ➤ The passworld at least have to containt a digit.
-
-lcredit=-1 ➤ The password at least have to contain a lowercase letter.
-
-maxrepeat=3 ➤ The password can not have the same character repited three contiusly times.
-
-reject_username ➤ The password can not contain the username inside itself.
-
-difok=7 ➤ The password it have to containt at least seven diferent characters from the last password ussed.
-
-enforce_for_root ➤ We will implement this password policy to root.
-
-## Startup Script
+## Monitoring Script
 
 This script collects various system information and displays it using the `wall` command.
 
 ```
 cd /usr/local/bin/
+touch monitoring.sh
+chmod 777 monitoring.sh
 sh monitoring.sh
 ```
 
-### Lines Explained with Syntax
-
-1. **Shebang**
-   ```bash
-   #!/bin/bash
-   ```
-   - **Purpose:** Specifies the script should be run using the Bash shell.
-
-2. **Architecture**
-   ```bash
-   arch=$(uname -a)
-   ```
-   - **`uname -a`:** Displays system information (kernel name, hostname, kernel version, etc.).
-   - **Purpose:** Stores system architecture information in the variable `arch`.
-
-3. **CPU Physical**
-   ```bash
-   cpuf=$(grep "physical id" /proc/cpuinfo | wc -l)
-   ```
-   - **`grep "physical id" /proc/cpuinfo`:** Searches for the string "physical id" in the `/proc/cpuinfo` file.
-   - **`wc -l`:** Counts the number of lines.
-   - **Purpose:** Counts the number of physical CPU cores.
-
-4. **CPU Virtual**
-   ```bash
-   cpuv=$(grep "processor" /proc/cpuinfo | wc -l)
-   ```
-   - **`grep "processor" /proc/cpuinfo`:** Searches for the string "processor" in the `/proc/cpuinfo` file.
-   - **`wc -l`:** Counts the number of lines.
-   - **Purpose:** Counts the number of virtual CPU cores (threads).
-
-5. **RAM Usage**
-   ```bash
-   ram_total=$(free --mega | awk '$1 == "Mem:" {print $2}')
-   ram_use=$(free --mega | awk '$1 == "Mem:" {print $3}')
-   ram_percent=$(free --mega | awk '$1 == "Mem:" {printf("%.2f"), $3/$2*100}')
-   ```
-   - **`free --mega`:** Displays memory usage in megabytes.
-   - **`awk '$1 == "Mem:" {print $2}'`:** Extracts total memory.
-   - **`awk '$1 == "Mem:" {print $3}'`:** Extracts used memory.
-   - **`awk '$1 == "Mem:" {printf("%.2f"), $3/$2*100}'`:** Calculates and formats memory usage percentage.
-   - **Purpose:** Stores total, used, and percentage of RAM usage.
-
-6. **Disk Usage**
-   ```bash
-   disk_total=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_t += $2} END {printf ("%.1fGb\n"), disk_t/1024}')
-   disk_use=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} END {print disk_u}')
-   disk_percent=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} {disk_t+= $2} END {printf("%d"), disk_u/disk_t*100}')
-   ```
-   - **`df -m`:** Displays disk space usage in megabytes.
-   - **`grep "/dev/"`:** Filters device filesystems.
-   - **`grep -v "/boot"`:** Excludes the `/boot` directory.
-   - **`awk '{disk_t += $2} END {printf ("%.1fGb\n"), disk_t/1024}'`:** Sums total disk space and converts to gigabytes.
-   - **`awk '{disk_u += $3} END {print disk_u}'`:** Sums used disk space.
-   - **`awk '{disk_u += $3} {disk_t+= $2} END {printf("%d"), disk_u/disk_t*100}'`:** Calculates and formats disk usage percentage.
-   - **Purpose:** Stores total, used, and percentage of disk space usage.
-
-7. **CPU Load**
-   Can also use vmstat to manually calculate.
-   ```bash
-   cpul=$(vmstat 1 2 | tail -1 | awk '{printf $15}')
-   cpu_op=$(expr 100 - $cpul)
-   cpu_fin=$(printf "%.1f" $cpu_op)
-   ```
-   - **`vmstat 1 2`:** Runs `vmstat` command twice with 1-second interval.
-   - **`tail -1`:** Takes the last line of the output.
-   - **`awk '{printf $15}'`:** Extracts the 15th field (idle CPU percentage).
-   - **`expr 100 - $cpul`:** Calculates used CPU percentage.
-   - **`printf "%.1f" $cpu_op`:** Formats the CPU usage percentage.
-   - **Purpose:** Stores CPU usage percentage.
-
-8. **Last Boot**
-   ```bash
-   lb=$(who -b | awk '$1 == "system" {print $3 " " $4}')
-   ```
-   - **`who -b`:** Displays last boot time.
-   - **`awk '$1 == "system" {print $3 " " $4}'`:** Extracts the boot time.
-   - **Purpose:** Stores the last boot time.
-
-9. **LVM Use**
-   ```bash
-   lvmu=$(if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]; then echo yes; else echo no; fi)
-   ```
-   - **`lsblk`:** Lists block devices.
-   - **`grep "lvm"`:** Searches for LVM (Logical Volume Manager) entries.
-   - **`wc -l`:** Counts the number of lines.
-   - **Purpose:** Checks if LVM is used and stores "yes" or "no".
-
-10. **TCP Connections**
-    ```bash
-    tcpc=$(ss -ta | grep ESTAB | wc -l)
-    ```
-    - **`ss -ta`:** Lists all TCP sockets.
-    - **`grep ESTAB`:** Filters established connections.
-    - **`wc -l`:** Counts the number of lines.
-    - **Purpose:** Counts the number of established TCP connections.
-
-11. **User Log**
-    ```bash
-    ulog=$(users | wc -w)
-    ```
-    - **`users`:** Lists logged-in users.
-    - **`wc -w`:** Counts the number of words.
-    - **Purpose:** Counts the number of logged-in users.
-
-12. **Network**
-    ```bash
-    ip=$(hostname -I)
-    mac=$(ip link | grep "link/ether" | awk '{print $2}')
-    ```
-    - **`hostname -I`:** Displays the IP address of the host.
-    - **`ip link | grep "link/ether"`:** Filters the network interface containing MAC address.
-    - **`awk '{print $2}'`:** Extracts the MAC address.
-    - **Purpose:** Stores IP and MAC addresses.
-
-13. **Sudo Commands**
-    ```bash
-    cmnd=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
-    ```
-    - **`journalctl _COMM=sudo`:** Filters logs for `sudo` commands.
-    - **`grep COMMAND`:** Searches for `COMMAND` entries.
-    - **`wc -l`:** Counts the number of lines.
-    - **Purpose:** Counts the number of `sudo` commands executed.
-
-14. **Display Information with `wall`**
-    ```bash
-    wall "	Architecture: $arch
-    	CPU physical: $cpuf
-    	vCPU: $cpuv
-    	Memory Usage: $ram_use/${ram_total}MB ($ram_percent%)
-    	Disk Usage: $disk_use/${disk_total} ($disk_percent%)
-    	CPU load: $cpu_fin%
-    	Last boot: $lb
-    	LVM use: $lvmu
-    	Connections TCP: $tcpc ESTABLISHED
-    	User log: $ulog
-    	Network: IP $ip ($mac)
-    	Sudo: $cmnd cmd"
-    ```
-    - **`wall`:** Broadcasts a message to all logged-in users.
-    - **Purpose:** Displays the collected system information.
+Details in `MONITORING.md`.
 
 ## Crontab
 
 A background process manager for scheduling and automating tasks.
 
-## Bonus Services
+```
+sudo crontab -u root -e
+*/10 * * * * /usr/local/bin/monitoring.sh
+sudo crontab -u root -l
+```
+
+Check logs:
 
 ```
-sudo apt install lighttpd
+sudo grep 'CRON' /var/log/syslog
+journalctl -u cron.service
+```
+
+Crontab Format:
+
+```
+Min Hour Day_Of_Month Month Day_Of_Week Command
 ```
 
 ## Signature
@@ -295,48 +153,61 @@ Obtain signature in sha1 format:
 - https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file
 - https://www.cloudflare.com/learning/access-management/what-is-ssh/
 - https://www.ssh.com/academy/ssh/protocol
+- https://www.baeldung.com/cs/127-0-0-1-vs-localhost
+- https://www.cloudflare.com/learning/network-layer/what-is-a-computer-port/
+- https://www.baeldung.com/linux/dev-sys-class-differences
 
 **Practical**
 
 - https://42-cursus.gitbook.io/guide/rank-01/born2beroot
 - https://mathieu-soysal.gitbook.io/born2beroot/
 - https://github.com/pasqualerossi/Born2BeRoot-Guide
-- https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lamp-on-debian-10
+- https://nordpass.com/blog/how-to-change-password-linux/
+- https://www.baeldung.com/linux/cron-logs-check
 - https://docs.google.com/document/d/1-BwCO0udUP7MhRh81Y681zz0BalXtKFtte_FHJc6G4s/edit
 
-## Unix Filesystem
+## Ports and Addresses
 
-| Name     | Description                                                                                            |
-| -------- | ------------------------------------------------------------------------------------------------------ |
-| `/`      | The top-level directory in the filesystem hierarchy, contains all other directories and files.         |
-| `/bin`   | Essential command binaries, contains commonly used commands like `ls`, `cp`, `mv`, etc.                |
-| `/sbin`  | System binaries, contains essential system management and administrative commands.                     |
-| `/etc`   | Configuration files, contains system-wide configuration files and scripts.                             |
-| `/dev`   | Device files, contains files representing hardware devices.                                            |
-| `/boot`  | Files used during boot process.                                                                        |
-| `/home`  | User home directories, contains personal directories for all users.                                    |
-| `/lib`   | Shared libraries, contains essential shared libraries and kernel modules.                              |
-| `/lib64` | 64-bit shared libraries, contains essential 64-bit shared libraries.                                   |
-| `/media` | Mount points for removable media, contains directories for mounting removable media like USB drives.   |
-| `/mnt`   | Temporary mount point, contains directories for temporarily mounting filesystems.                      |
-| `/opt`   | Optional software packages, contains add-on application software packages.                             |
-| `/proc`  | Process and system information, contains virtual filesystem providing process and kernel information.  |
-| `/root`  | Home directory for the root user, contains personal files and settings for the root user.              |
-| `/run`   | Runtime variable data, contains information about the running system since last boot.                  |
-| `/srv`   | Data for services, contains data served by the system, such as websites.                               |
-| `/sys`   | System information, contains virtual filesystem with system and hardware information.                  |
-| `/tmp`   | Temporary files, contains temporary files created by users and applications.                           |
-| `/usr`   | Secondary hierarchy, contains user programs and data.                                                  |
-| `/var`   | Variable files, contains files that change frequently, such as logs, mail spools, and temporary files. |
+`127.0.0.1` or localhost is a loopback address, used by the computer itself only.
 
-| Name        | Description                                |
-| ----------- | ------------------------------------------ |
-| `/usr/bin`  | Non-essential command binaries.            |
-| `/usr/sbin` | Non-essential system binaries.             |
-| `/usr/lib`  | Libraries for `/usr/bin` and `/usr/sbin`.  |
+| Port  | Protocol & Purpose                              |
+|-------|-------------------------------------------------|
+| 20,21 | FTP: Transfers files between client and server. |
+| 22    | SSH: Creates secure network connections.        |
+| 25    | SMTP: Sends emails.                             |
+| 53    | DNS: Converts domain names to IP addresses.     |
+| 80    | HTTP: Web communication protocol.               |
+| 123   | NTP: Synchronizes computer clocks.              |
+| 179   | BGP: Routes data between large networks.        |
+| 443   | HTTPS: Secure version of HTTP.                  |
+| 500   | ISAKMP: Sets up secure IPsec connections.       |
+| 587   | Secure SMTP: Encrypted email transmission.      |
+| 3389  | RDP: Remote desktop access.                     |
 
-| Name        | Description                                |
-| ----------- | ------------------------------------------ |
-| `/var/log`  | Log files.                                 |
-| `/var/tmp`  | Temporary files preserved between reboots. |
-| `/var/lib`  | State information.                         |
+## UNIX Filesystem
+
+| Name     | Description                                                                 |
+|----------|---------------------------------------------------------------------------- |
+| `/bin`   | Essential command binaries, contains `ls`, `cp`, `mv`, etc.                 |
+| `/sbin`  | Essential superuser binaries, contains `mount`, `deluser`, etc.             |
+| `/lib`   | Shared libraries and kernel modules.                                        |
+| `/usr`   | Secondary hierarchy, contains user programs and data.                       |
+| `/etc`   | System-wide configuration files.                                            |
+| `/home`  | User home directories.                                                      |
+| `/boot`  | Files used during the boot process.                                         |
+| `/dev`   | Device files representing hardware devices.                                 |
+| `/sys`   | Device files providing a gateway for direct device interactions.            |
+| `/opt`   | Optional software packages.                                                 |
+| `/var`   | Variable system files frequently changed, such as logs and temporary files. |
+| `/tmp`   | Temporary files, won't be persisted between reboots.                        |
+| `/proc`  | Virtual filesystem to keep track of running processes.                      |
+| `/media` | Mount points for removable media.                                           |
+| `/mnt`   | Temporary mount point for filesystems.                                      |
+| `/srv`   | Contains data from servers.                                                 |
+
+`/usr` subdirectories:
+
+| Name             | Description                     |
+| ---------------- | --------------------------------|
+| `/usr/bin`       | Non-essential command binaries. |
+| `/usr/local/bin` | Locally compiled binaries.      |
