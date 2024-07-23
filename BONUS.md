@@ -1,5 +1,7 @@
 # Bonus: WordPress LLMP Stack
 
+![alt text](<Screenshot 2024-07-23 220606.png>)
+
 ## Install PHP
 
 ```
@@ -20,6 +22,10 @@ sudo systemctl disable apache2
 sudo apt install lighttpd
 sudo ufw allow 80
 sudo ufw allow http
+
+sudo systemctl start lighttpd
+sudo systemctl enable lighttpd
+sudo systemctl status lighttpd
 ```
 
 Add port forwarding for 8080 to 80 in VM >> Settings >> Network >> Port Forwarding.
@@ -101,11 +107,12 @@ exit
 
 Output database:
 
-
 ```
 mariadb -u jin-tan -p
 SHOW DATABASES;
 ```
+
+![alt text](<Screenshot 2024-07-23 213153.png>)
 
 ## Configure WordPress
 
@@ -122,16 +129,11 @@ define( 'DB_USER', 'jin-tan' );
 define( 'DB_PASSWORD', 'admin123' );
 ```
 
-Test lighttpd status:
-
-```
-sudo lighttpd -v
-sudo systemctl start lighttpd
-sudo systemctl enable lighttpd
-sudo systemctl status lighttpd
-```
+Go to `http://localhost` and finish setup.
 
 # Bonus: FTP
+
+![alt text](<Screenshot 2024-07-23 225503.png>)
 
 ```
 sudo apt install ftp vsftpd

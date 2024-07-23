@@ -10,9 +10,25 @@ Set storage to 12GB, or 30GB for bonus
 
 ## Install Debian
 
+Create partitions:
+
+![alt text](image.png)
+
+Configure Mounts:
+
+![alt text](2024-07-22_050900_proc.jpg)
+
+Configure Filesystem:
+
+![alt text](VirtualBox_Born2beRoot_22_07_2024_15_00_04.png)
+
 ## Setup VM
 
-### Sudo
+### Check LVM
+
+![alt text](<Screenshot 2024-07-23 022513.png>)
+
+### Install Sudo
 
 A program to enable users to run programs using privileges of superuser.
 
@@ -20,7 +36,32 @@ A user can access sudo when added to sudo permission group.
 
 Each group have its own GID.
 
-### SSH Policies
+```
+su
+apt install sudo
+sudo reboot
+```
+
+### Add User & Groups
+
+```
+sudo adduser jin-tan
+sudo addgroup user42
+sudo jin-tan user42
+sudo jin-tan sudo
+getent group user42
+getent group sudo
+```
+
+![alt text](<Screenshot 2024-07-23 022446.png>)
+
+### Configure SSH
+
+```
+sudo apt install openssh-server
+sudo nano /etc/ssh/sshd_config
+sudo service ssh restart
+```
 
 For `permitrootlogin`:
 
@@ -31,6 +72,8 @@ For `permitrootlogin`:
 
 From this point onward, we can use SSH to configure the VM from host machine.
 
+![alt text](<Screenshot 2024-07-22 192010.png>)
+
 Connect with SSH:
 
 ```
@@ -39,9 +82,17 @@ ssh jin-tan@localhost -p 4242
 
 exit or Ctrl+D to disconnect.
 
-### UFW Policies
+### Configure UFW
 
 A CLI frontend for configuring iptables.
+
+```
+sudo apt install ufw
+sudo ufw enable
+sudo ufw allow ssh
+sudo ufw allow 4242
+sudo ufw status
+```
 
 **Iptables <-> UFW Examples**
 
@@ -55,11 +106,16 @@ Deny IP:
 `iptables -A INPUT -s 192.168.1.100 -j DROP`
 `sudo ufw deny from 192.168.1.100`
 
-### Sudo Policies
+### Configure Sudo
 
-Sudoers file handles privilege escalation policies. Use visudo for syntax-safe edits to sudoers.
+Sudoers file handles privilege escalation policies. Use `visudo` for syntax-safe edits to sudoers.
 
-`sudo visudo`
+```
+sudo visudo
+mkdir /var/log/sudo
+cd /var/log/sudo
+touch sudo.log
+```
 
 | Configuration                    | Description                                             |
 |----------------------------------|---------------------------------------------------------|
@@ -70,7 +126,15 @@ Sudoers file handles privilege escalation policies. Use visudo for syntax-safe e
 | `Defaults requiretty`            | Requires sudo to be run from a terminal.                |
 | `Defaults secure_path=""`        | Specifies a secure PATH for sudo.                       |
 
-## Password Policies
+![alt text](<Screenshot 2024-07-23 022649.png>)
+
+### Configure Password Policies
+
+```
+sudo nano /etc/login.defs
+sudo apt-get install libpam-pwquality
+sudo nano /etc/pam.d/common-password
+```
 
 For `login.defs` (Age Policies):
 
@@ -93,7 +157,7 @@ For PAM (Strength Policies):
 | difok=7          | The password must contain at least seven different characters from the last password used.                |
 | enforce_for_root | This password policy will be enforced for the root user.                                                  |
 
-## Monitoring Script
+### Monitoring Script
 
 This script collects various system information and displays it using the `wall` command.
 
@@ -104,9 +168,11 @@ chmod 777 monitoring.sh
 sh monitoring.sh
 ```
 
+![alt text](<Screenshot 2024-07-24 031049.png>)
+
 Details in `MONITORING.md`.
 
-## Crontab
+### Crontab
 
 A background process manager for scheduling and automating tasks.
 
@@ -136,6 +202,13 @@ Store VM in `~/VirtualBox VMs/`
 Obtain signature in sha1 format:
 
 `shasum Born2beRoot.vdi`
+
+## Specifications
+
+![alt text](<Screenshot 2024-07-22 185140.png>)
+![alt text](<Screenshot 2024-07-22 185218.png>)
+![alt text](<Screenshot 2024-07-22 185229.png>)
+![alt text](<Screenshot 2024-07-22 185248.png>)
 
 ## Docs
 
@@ -168,6 +241,8 @@ Obtain signature in sha1 format:
 
 ## Ports and Addresses
 
+![alt text](<Screenshot 2024-07-23 221426.png>)
+
 `127.0.0.1` or localhost is a loopback address, used by the computer itself only.
 
 | Port  | Protocol & Purpose                              |
@@ -185,6 +260,8 @@ Obtain signature in sha1 format:
 | 3389  | RDP: Remote desktop access.                     |
 
 ## UNIX Filesystem
+
+![alt text](image-1.png)
 
 | Name     | Description                                                                 |
 |----------|---------------------------------------------------------------------------- |
