@@ -153,12 +153,12 @@ For PAM (Strength Policies):
 | Policies         | Description                                                                                               |
 |------------------|-----------------------------------------------------------------------------------------------------------|
 | minlen=10        | The minimum characters a password must contain.                                                           |
-| ucredit=-1       | The password must contain at least 1 capital letter. The negative sign indicates a minimum requirement.   |
-| dcredit=-1       | The password must contain at least 1 digit.                                                               |
-| lcredit=-1       | The password must contain at least 1 lowercase letter.                                                    |
-| maxrepeat=3      | The password cannot have the same character repeated 3 consecutive times.                                     |
-| reject_username  | The password cannot contain the username within itself.                                                   |
-| difok=7          | The password must contain at least 7 different characters from the last password used.                    |
+| ucredit=-1       | Password must contain at least 1 capital letter. The - sign indicates a minimum requirement.   |
+| dcredit=-1       | Password must contain at least 1 digit.                                                               |
+| lcredit=-1       | Password must contain at least 1 lowercase letter.                                                    |
+| maxrepeat=3      | Password cannot have the same character repeated 3 consecutive times.                                     |
+| reject_username  | Password cannot contain the username within itself.                                                   |
+| difok=7          | Password must contain at least 7 different characters from the last password.                    |
 | enforce_for_root | Password policy will be enforced for the root user.                                                       |
 
 ### Monitoring Script
