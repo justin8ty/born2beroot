@@ -153,7 +153,7 @@ For PAM (Strength Policies):
 | Policies         | Description                                                                                               |
 |------------------|-----------------------------------------------------------------------------------------------------------|
 | minlen=10        | The minimum characters a password must contain.                                                           |
-| ucredit=-1       | The password must contain at least one capital letter. The negative sign indicates a minimum requirement. |
+| ucredit=-1       | The password must contain at least 1 capital letter. The negative sign indicates a minimum requirement.   |
 | dcredit=-1       | The password must contain at least 1 digit.                                                               |
 | lcredit=-1       | The password must contain at least 1 lowercase letter.                                                    |
 | maxrepeat=3      | The password cannot have the same character repeated 3 consecutive times.                                     |
