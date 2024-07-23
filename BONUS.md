@@ -1,8 +1,12 @@
-# Bonus: WordPress LLMP Stack
+# Bonus: WordPress LLMP Stack Server
+
+Locally host a WordPress server.
 
 ![alt text](<Screenshot 2024-07-23 220606.png>)
 
 ## Install PHP
+
+A scripting language.
 
 ```
 sudo apt install php php-cgi php-mysql -y
@@ -17,6 +21,8 @@ sudo systemctl disable apache2
 ```
 
 ## Install Lighttpd
+
+A fast web server software.
 
 ```
 sudo apt install lighttpd
@@ -65,6 +71,8 @@ Test with host browser: http://localhost/info.php
 
 ## Install WordPress
 
+A CMS based on PHP and MySQL.
+
 ```
 sudo apt install curl wget tar -y
 cd /tmp && wget https://wordpress.org/latest.tar.gz
@@ -81,6 +89,8 @@ sudo chmod -R 755 /var/www/html/
 ```
 
 ## Install MariaDB
+
+An enterprise fork of MySQL.
 
 ```
 sudo apt install mariadb-server -y
@@ -122,7 +132,7 @@ sudo cp wp-config-sample.php wp-config.php
 sudo nano wp-config.php
 ```
 
-Edit database, user, password based on database.
+Edit following fields based on database.
 ```
 define( 'DB_NAME', 'wp_db' );
 define( 'DB_USER', 'jin-tan' );
@@ -131,7 +141,9 @@ define( 'DB_PASSWORD', 'admin123' );
 
 Go to `http://localhost` and finish setup.
 
-# Bonus: FTP
+# Bonus: FTP Server
+
+A protocol to transfer files between computers on a network.
 
 ![alt text](<Screenshot 2024-07-23 225503.png>)
 
@@ -141,19 +153,12 @@ sudo ufw allow 21
 sudo nano /etc/vsftpd.conf
 ```
 
-Edit these lines:
+Uncomment these lines:
 
 ```
-# Allow anonymous FTP? (Disabled by default)
 anonymous_enable=NO
-
-# Uncomment this to allow local users to log in.
 local_enable=YES
-
-# Enable write permissions for local users.
 write_enable=YES
-
-# Optional: Customize the welcome message
 ftpd_banner=Welcome to blah FTP service.
 ```
 
@@ -180,8 +185,6 @@ ls
 ```
 
 # Docs
-
-**Bonus**
 
 - https://www.digitalocean.com/community/tutorials/install-wordpress-on-ubuntu
 - https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mariadb-php-lamp-stack-on-debian-10
