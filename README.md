@@ -14,7 +14,7 @@ Create partitions:
 
 ![alt text](image.png)
 
-Configure mounts:
+Configure mounts and sizes:
 
 ![alt text](2024-07-22_050900_proc.jpg)
 
@@ -128,7 +128,7 @@ touch sudo.log
 | `Defaults logfile="/sudo.log"`   | Specifies the log file location for sudo activities.    |
 | `Defaults log_input, log_output` | Logs both input and output of sudo commands.            |
 | `Defaults requiretty`            | Requires sudo to be run from a terminal.                |
-| `Defaults secure_path=""`        | Specifies a secure PATH for sudo.                       |
+| `Defaults secure_path=""`        | Excludes specified paths from sudo.                     |
 
 ![alt text](<Screenshot 2024-07-23 022649.png>)
 
@@ -154,12 +154,12 @@ For PAM (Strength Policies):
 |------------------|-----------------------------------------------------------------------------------------------------------|
 | minlen=10        | The minimum characters a password must contain.                                                           |
 | ucredit=-1       | The password must contain at least one capital letter. The negative sign indicates a minimum requirement. |
-| dcredit=-1       | The password must contain at least one digit.                                                             |
-| lcredit=-1       | The password must contain at least one lowercase letter.                                                  |
-| maxrepeat=3      | The password cannot have the same character repeated three consecutive times.                             |
+| dcredit=-1       | The password must contain at least 1 digit.                                                               |
+| lcredit=-1       | The password must contain at least 1 lowercase letter.                                                    |
+| maxrepeat=3      | The password cannot have the same character repeated 3 consecutive times.                                     |
 | reject_username  | The password cannot contain the username within itself.                                                   |
-| difok=7          | The password must contain at least seven different characters from the last password used.                |
-| enforce_for_root | This password policy will be enforced for the root user.                                                  |
+| difok=7          | The password must contain at least 7 different characters from the last password used.                    |
+| enforce_for_root | Password policy will be enforced for the root user.                                                       |
 
 ### Monitoring Script
 
