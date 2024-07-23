@@ -2,11 +2,11 @@
 
 ## Install VM
 
-Folder should be in sgoinfre
+Folder should be in sgoinfre.
 
-Set memory to 1024 MB
+Set memory to 1024 MB.
 
-Set storage to 12GB, or 30GB for bonus
+Set storage to 12GB, or 30GB for bonus.
 
 ## Install Debian
 
@@ -14,11 +14,11 @@ Create partitions:
 
 ![alt text](image.png)
 
-Configure Mounts:
+Configure mounts:
 
 ![alt text](2024-07-22_050900_proc.jpg)
 
-Configure Filesystem:
+Configure filesystem:
 
 ![alt text](VirtualBox_Born2beRoot_22_07_2024_15_00_04.png)
 
@@ -30,17 +30,17 @@ Configure Filesystem:
 
 ### Install Sudo
 
-A program to enable users to run programs using privileges of superuser.
+A program that enable users to run programs using superuser (su) privileges.
 
-A user can access sudo when added to sudo permission group.
-
-Each group have its own GID.
+A user can access sudo when added to sudo group. Each group have its own GID.
 
 ```
 su
 apt install sudo
 sudo reboot
 ```
+
+exit or Ctrl+D to exit su.
 
 ### Add User & Groups
 
@@ -117,7 +117,7 @@ cd /var/log/sudo
 touch sudo.log
 ```
 
-| Configuration                    | Description                                             |
+| Config                           | Description                                             |
 |----------------------------------|---------------------------------------------------------|
 | `Defaults passwd_tries=3`        | Sets a limit of 3 password attempts before locking out. |
 | `Defaults badpass_message=""`    | Customizes the error message for incorrect passwords.   |
@@ -178,7 +178,7 @@ A background process manager for scheduling and automating tasks.
 
 ```
 sudo crontab -u root -e
-*/10 * * * * /usr/local/bin/monitoring.sh
+*/10 * * * * sh /usr/local/bin/monitoring.sh
 sudo crontab -u root -l
 ```
 
@@ -192,7 +192,7 @@ journalctl -u cron.service
 Crontab Format:
 
 ```
-Min Hour Day_Of_Month Month Day_Of_Week Command
+Min Hour Day_Of_Month Month Day_Of_Week Cmd
 ```
 
 ## Signature
@@ -219,7 +219,6 @@ Obtain signature in sha1 format:
 - https://github.com/edithturn/42-silicon-valley-netwhat
 - https://www.youtube.com/watch?v=9J1nJOivdyw
 - https://www.freecodecamp.org/news/file-systems-architecture-explained/
-- https://mathieu-soysal.gitbook.io/born2beroot
 - https://forums.debian.net/viewtopic.php?t=11065
 - https://www.linuxatemyram.com/
 - https://unix.stackexchange.com/questions/33541/free-output-format/33549
