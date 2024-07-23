@@ -205,7 +205,7 @@ Min Hour Day_Of_Month Month Day_Of_Week Cmd
 
 Store VM in `~/VirtualBox VMs/`
 
-Obtain signature in sha1 checksum format:
+Obtain signature in SHA-1 checksum format:
 
 `shasum Born2beRoot.vdi`
 
