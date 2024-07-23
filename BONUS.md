@@ -1,4 +1,4 @@
-# Bonus: WordPress Server (LLMP Stack)
+# WordPress Server (LLMP Stack)
 
 Locally host a WordPress server.
 
@@ -141,7 +141,7 @@ define( 'DB_PASSWORD', 'admin123' );
 
 Go to `http://localhost` and finish setup.
 
-# Bonus: FTP Server
+# FTP Server
 
 A protocol to transfer files between computers on a network.
 
