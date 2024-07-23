@@ -24,7 +24,11 @@ Configure filesystem:
 
 ## Setup VM
 
-### Check LVM
+### Check Partitions
+
+```
+lsblk
+```
 
 ![alt text](<Screenshot 2024-07-23 022513.png>)
 
