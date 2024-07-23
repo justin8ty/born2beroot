@@ -1,4 +1,4 @@
-# Bonus: WordPress LLMP Stack Server
+# Bonus: WordPress Server (LLMP Stack)
 
 Locally host a WordPress server.
 
