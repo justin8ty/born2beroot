@@ -178,9 +178,9 @@ sudo chmod 750 /home/ftpuser/ftp/upload
 ```
 ftp localhost
 quit
-echo "This is a test file" > testfile.txt
+echo "Hello World!" > hello.txt
 ftp localhost
-put testfile.txt
+put hello.txt
 ls
 ```
 
