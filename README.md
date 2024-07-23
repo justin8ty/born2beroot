@@ -40,7 +40,7 @@ A user can access sudo when added to sudo group. Each group have its own GID.
 
 ```
 su
-apt install sudo
+apt install sudo -y
 sudo reboot
 ```
 
@@ -61,8 +61,10 @@ getent group sudo
 
 ### Configure SSH
 
+A protocol that sets up encrypted connections for remote logins and file transfers between computers.
+
 ```
-sudo apt install openssh-server
+sudo apt install openssh-server -y
 sudo nano /etc/ssh/sshd_config
 sudo service ssh restart
 ```
@@ -203,11 +205,15 @@ Min Hour Day_Of_Month Month Day_Of_Week Cmd
 
 Store VM in `~/VirtualBox VMs/`
 
-Obtain signature in sha1 format:
+Obtain signature in sha1 checksum format:
 
 `shasum Born2beRoot.vdi`
 
 ## Ports and Addresses
+
+A port is a virtual point where network connections start and end.
+
+An address is a unique identifier for devices on a network.
 
 ![alt text](<Screenshot 2024-07-23 221426.png>)
 
