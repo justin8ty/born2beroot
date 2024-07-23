@@ -22,7 +22,7 @@
 
 ## Simple Setup
 
-- [ ] Ensure that the machine does not have a graphical environment at launch.
+- [ ] Ensure that VM does not have a graphical environment at launch. `ls /usr/bin/*session`
 - [ ] Connect to VM as a created user.
 - [ ] Ensure password follows specs (2 days min, 7, 30 days max).
 	`sudo chage -l username`
@@ -31,7 +31,7 @@
 - [ ] Check SSH service is started.
 	`sudo systemctl status ssh`
 - [ ] Check the chosen operating system (Debian or CentOS).
-	`lsb_release -a || cat /etc/os-release`
+	`uname --kernel-version`
 
 ## User
 
@@ -45,23 +45,23 @@
 
 - [ ] Create new user (e.g. user42).
 	`sudo adduser new_username`
-- [ ] Assign a password of your choice, according to specs.
+- [ ] Assign a password according to specs.
 	`getent group sudo`
 - [ ] Explain how to implement the password policy. 
 - [ ] There should be 1-2 modified files. (else evaluation stops here).
-- [ ] Create a group named “evaluating” and assign it to new user.
+- [ ] Create a group named “evaluating” and assign to new user.
 	```
 	sudo groupadd evaluating
 	sudo usermod -aG evaluating new_username
 	```
 - [ ] Check if new user belongs to “evaluating” group.
 	`getent group evaluating`
-- [ ] Explain advantages of the password policy.
+- [ ] Explain advantages of the password policies.
 - [ ] Explain advantages/disadvantages of the policy implementation.
 
 ## Hostname & Partitions
 
-If on restart, the hostname has not been updated, the evaluation stops here.
+If hostname isn't updated on restart, evaluation stops here.
 
 - [ ] Check if hostname is correctly formatted: login42.
 	`hostnamectl`
@@ -70,19 +70,19 @@ If on restart, the hostname has not been updated, the evaluation stops here.
 	sudo hostnamectl set-hostname new_hostname
 	sudo reboot
 	```
-- [ ] Restore to the original hostname, then restart VM.
+- [ ] Restore to original hostname, then restart VM.
 	```
 	sudo hostnamectl set-hostname new_hostname
 	sudo reboot
 	```
 - [ ] Explain how to view the partitions for the VM.
 	`lsblk`
-- [ ] Compare the output with the example in PDF.
+- [ ] Compare output with example in PDF.
 - [ ] Explain LVM and how it works.
 
 ## Sudo
 
-- [ ] Check “sudo” program is properly installed.
+- [ ] Check “sudo” program is installed.
 	`dpkg -l | grep sudo`
 - [ ] Demo assigning a new user to the “sudo” group.
 - [ ] Explain the value and operation of sudo using examples.
@@ -135,26 +135,3 @@ If on restart, the hostname has not been updated, the evaluation stops here.
 	sudo reboot
 	sudo crontab -u root -e
 	```
-
-## Commands Dump
-
-```
-sudo ufw status
-sudo systemctl status ssh
-getent group sudo
-getent group user42
-sudo adduser new username
-sudo groupadd groupname
-sudo usermod -aG groupname username
-sudo chage -l username - check password expire rules
-hostnamectl
-hostnamectl set-hostname new_hostname - to change the current hostname
-Restart your Virtual Machine.
-sudo nano /etc/hosts - change current hostname to new hostname
-lsblk to display the partitions
-dpkg -l | grep sudo – to show that sudo is installed
-sudo ufw status numbered
-sudo ufw allow port-id
-sudo ufw delete rule number
-ssh your_user_id@127.0.0.1 -p 4242 - do this in terminal to show that SSH to port 4242 is working
-```
