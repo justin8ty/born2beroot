@@ -1,6 +1,6 @@
 # WordPress Server (LLMP Stack)
 
-Locally host a WordPress server.
+We will locally host a WordPress server.
 
 ![alt text](<Screenshot 2024-07-23 220606.png>)
 
@@ -38,7 +38,7 @@ Add port forwarding for 8080 to 80 in VM >> Settings >> Network >> Port Forwardi
 
 Test with host browser: http://localhost:8080
 
-Activate Lighttpd FastCGI module:
+Enable Lighttpd FastCGI module:
 
 ```
 sudo lighty-enable-mod fastcgi
@@ -52,7 +52,7 @@ sudo service lighttpd force-reload
 nano /var/www/html/info.php
 ```
 
-Append these lines to info.php:
+Append these lines to `info.php`:
 
 ```
 <?php
@@ -71,7 +71,7 @@ Test with host browser: http://localhost/info.php
 
 ## Install WordPress
 
-A CMS based on PHP and MySQL.
+A CMS and website builder based on PHP and MySQL.
 
 ```
 sudo apt install curl wget tar -y
