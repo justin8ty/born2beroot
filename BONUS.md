@@ -25,7 +25,7 @@ sudo systemctl disable apache2
 A fast web server software.
 
 ```
-sudo apt install lighttpd
+sudo apt install lighttpd -y
 sudo ufw allow 80
 sudo ufw allow http
 
@@ -148,7 +148,7 @@ A protocol to transfer files between computers on a network.
 ![alt text](<Screenshot 2024-07-23 225503.png>)
 
 ```
-sudo apt install ftp vsftpd
+sudo apt install ftp vsftpd -y
 sudo ufw allow 21
 sudo nano /etc/vsftpd.conf
 ```
