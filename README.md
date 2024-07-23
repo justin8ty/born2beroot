@@ -93,7 +93,7 @@ exit or Ctrl+D to disconnect.
 A CLI frontend for configuring iptables.
 
 ```
-sudo apt install ufw
+sudo apt install ufw -y
 sudo ufw enable
 sudo ufw allow ssh
 sudo ufw allow 4242
@@ -138,11 +138,11 @@ touch sudo.log
 
 ```
 sudo nano /etc/login.defs
-sudo apt-get install libpam-pwquality
+sudo apt-get install libpam-pwquality -y
 sudo nano /etc/pam.d/common-password
 ```
 
-For `login.defs` (Age Policies):
+Age Policies:
 
 | Policies      | Description                            |
 |---------------|----------------------------------------|
@@ -150,18 +150,18 @@ For `login.defs` (Age Policies):
 | PASS_MIN_DAYS | The min days till password change.     |
 | PASS_WARN_AGE | The days till password warning.        |
 
-For PAM (Strength Policies):
+Strength Policies:
 
-| Policies         | Description                                                                                               |
-|------------------|-----------------------------------------------------------------------------------------------------------|
-| minlen=10        | The minimum characters a password must contain.                                                           |
-| ucredit=-1       | Password must contain at least 1 capital letter. The `-` sign indicates a minimum requirement.   |
-| dcredit=-1       | Password must contain at least 1 digit.                                                               |
-| lcredit=-1       | Password must contain at least 1 lowercase letter.                                                    |
-| maxrepeat=3      | Password cannot have the same character repeated 3 consecutive times.                                     |
-| reject_username  | Password cannot contain the username within itself.                                                   |
-| difok=7          | Password must contain at least 7 different characters from the last password.                    |
-| enforce_for_root | Password policy will be enforced for the root user.                                                       |
+| Policies         | Description                                                                                    |
+|------------------|------------------------------------------------------------------------------------------------|
+| minlen=10        | The minimum characters a password must contain.                                                |
+| ucredit=-1       | Password must contain at least 1 capital letter. The `-` sign indicates a minimum requirement. |
+| dcredit=-1       | Password must contain at least 1 digit.                                                        |
+| lcredit=-1       | Password must contain at least 1 lowercase letter.                                             |
+| maxrepeat=3      | Password cannot have the same character repeated 3 consecutive times.                          |
+| reject_username  | Password cannot contain the username within itself.                                            |
+| difok=7          | Password must contain at least 7 different characters from the last password.                  |
+| enforce_for_root | Password policy will be enforced for the root user.                                            |
 
 ### Monitoring Script
 
