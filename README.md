@@ -207,41 +207,6 @@ Obtain signature in sha1 format:
 
 `shasum Born2beRoot.vdi`
 
-## Specifications
-
-![alt text](<Screenshot 2024-07-22 185140.png>)
-![alt text](<Screenshot 2024-07-22 185218.png>)
-![alt text](<Screenshot 2024-07-22 185229.png>)
-![alt text](<Screenshot 2024-07-22 185248.png>)
-
-## Docs
-
-**Theory**
-
-- https://youtu.be/42iQKuQodW4
-- https://www.nakivo.com/blog/virtualbox-network-setting-guide/
-- https://github.com/edithturn/42-silicon-valley-netwhat
-- https://www.youtube.com/watch?v=9J1nJOivdyw
-- https://www.freecodecamp.org/news/file-systems-architecture-explained/
-- https://forums.debian.net/viewtopic.php?t=11065
-- https://www.linuxatemyram.com/
-- https://unix.stackexchange.com/questions/33541/free-output-format/33549
-- https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file
-- https://www.cloudflare.com/learning/access-management/what-is-ssh/
-- https://www.ssh.com/academy/ssh/protocol
-- https://www.baeldung.com/cs/127-0-0-1-vs-localhost
-- https://www.cloudflare.com/learning/network-layer/what-is-a-computer-port/
-- https://www.baeldung.com/linux/dev-sys-class-differences
-
-**Practical**
-
-- https://42-cursus.gitbook.io/guide/rank-01/born2beroot
-- https://mathieu-soysal.gitbook.io/born2beroot/
-- https://github.com/pasqualerossi/Born2BeRoot-Guide
-- https://nordpass.com/blog/how-to-change-password-linux/
-- https://www.baeldung.com/linux/cron-logs-check
-- https://docs.google.com/document/d/1-BwCO0udUP7MhRh81Y681zz0BalXtKFtte_FHJc6G4s/edit
-
 ## Ports and Addresses
 
 ![alt text](<Screenshot 2024-07-23 221426.png>)
@@ -291,3 +256,38 @@ Obtain signature in sha1 format:
 | ---------------- | --------------------------------|
 | `/usr/bin`       | Non-essential command binaries. |
 | `/usr/local/bin` | Locally compiled binaries.      |
+
+## Docs
+
+**Theory**
+
+- https://youtu.be/42iQKuQodW4
+- https://www.nakivo.com/blog/virtualbox-network-setting-guide/
+- https://github.com/edithturn/42-silicon-valley-netwhat
+- https://www.youtube.com/watch?v=9J1nJOivdyw
+- https://www.freecodecamp.org/news/file-systems-architecture-explained/
+- https://forums.debian.net/viewtopic.php?t=11065
+- https://www.linuxatemyram.com/
+- https://unix.stackexchange.com/questions/33541/free-output-format/33549
+- https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file
+- https://www.cloudflare.com/learning/access-management/what-is-ssh/
+- https://www.ssh.com/academy/ssh/protocol
+- https://www.baeldung.com/cs/127-0-0-1-vs-localhost
+- https://www.cloudflare.com/learning/network-layer/what-is-a-computer-port/
+- https://www.baeldung.com/linux/dev-sys-class-differences
+
+**Practical**
+
+- https://42-cursus.gitbook.io/guide/rank-01/born2beroot
+- https://mathieu-soysal.gitbook.io/born2beroot/
+- https://github.com/pasqualerossi/Born2BeRoot-Guide
+- https://nordpass.com/blog/how-to-change-password-linux/
+- https://www.baeldung.com/linux/cron-logs-check
+- https://docs.google.com/document/d/1-BwCO0udUP7MhRh81Y681zz0BalXtKFtte_FHJc6G4s/edit
+
+## Specifications
+
+![alt text](<Screenshot 2024-07-22 185140.png>)
+![alt text](<Screenshot 2024-07-22 185218.png>)
+![alt text](<Screenshot 2024-07-22 185229.png>)
+![alt text](<Screenshot 2024-07-22 185248.png>)
