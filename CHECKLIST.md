@@ -7,7 +7,7 @@
 ## General Instructions
 
 - [ ] Git repo contains a signature.txt file.
-- [ ] Check the signature against the students `.vdi` file, make sure it’s identical. 
+- [ ] Check whether signature is identical to `.vdi` file. 
 - [ ] Clone VM || create a snapshot && open VM.
 
 ## Mandatory Part
@@ -23,8 +23,8 @@
 ## Simple Setup
 
 - [ ] Ensure that the machine does not have a graphical environment at launch.
-- [ ] Connect to VM as a created user (which isn’t a root)
-- [ ] Ensure the password follows the required policy (2 days min, 7, 30 days max).
+- [ ] Connect to VM as a created user.
+- [ ] Ensure password follows specs (2 days min, 7, 30 days max).
 	`sudo chage -l username`
 - [ ] Check UFW service is started.
 	`sudo ufw status`
@@ -54,18 +54,18 @@
 	sudo groupadd evaluating
 	sudo usermod -aG evaluating new_username
 	```
-- [ ] Check if the new user belongs to the “evaluating” group.
+- [ ] Check if new user belongs to “evaluating” group.
 	`getent group evaluating`
-- [ ] Explain advantages of the password policy 
+- [ ] Explain advantages of the password policy.
 - [ ] Explain advantages/disadvantages of the policy implementation.
 
 ## Hostname & Partitions
 
 If on restart, the hostname has not been updated, the evaluation stops here.
 
-- [ ] Check hostname of machine is correctly formatted: login42.
+- [ ] Check if hostname is correctly formatted: login42.
 	`hostnamectl`
-- [ ] Modify this hostname by replacing the login with yours, then restart VM.
+- [ ] Modify this hostname by replacing it with yours, then restart VM.
 	```
 	sudo hostnamectl set-hostname new_hostname
 	sudo reboot
@@ -85,10 +85,10 @@ If on restart, the hostname has not been updated, the evaluation stops here.
 - [ ] Check “sudo” program is properly installed.
 	`dpkg -l | grep sudo`
 - [ ] Demo assigning a new user to the “sudo” group.
-- [ ] The subject imposes strict rules for sudo. Explain the value and operation of sudo using examples.
+- [ ] Explain the value and operation of sudo using examples.
 	`sudo visudo ls`
-- [ ] Show implementation of the rules according to specs.
-- [ ] Verify the `/var/log/sudo/` folder exists and has at least one file. You should see a history of the commands used with sudo in the file.
+- [ ] Show implementation, according to specs.
+- [ ] Verify that `/var/log/sudo/` folder exists and has a file. The file content should have a history of sudo commands.
 - [ ] Run a command via sudo. See if the file has been updated.
 
 ## UFW
@@ -96,8 +96,8 @@ If on restart, the hostname has not been updated, the evaluation stops here.
 - [ ] Check “UFW” program is installed and works.
 	`sudo ufw status numbered`
 - [ ] Ask for basic explanation of UFW and why use it.
-- [ ] List the active rules in UFW. A rule must exist for port 4242.
-- [ ] Add a new rule to open port 8080. Check that this one has been added by listing the active rules.
+- [ ] List active rules in UFW. A rule must exist for port 4242.
+- [ ] Add a new rule to open port 8080. Then, list the active rules.
 	`sudo ufw allow 8080`
 - [ ] Delete this new rule.
 	```
@@ -107,7 +107,7 @@ If on restart, the hostname has not been updated, the evaluation stops here.
 
 ## SSH
 
-- [ ] Check that the SSH service is installed and works.
+- [ ] Check that SSH service is installed and works.
 	`sudo service ssh status`
 - [ ] Explain what SSH is and why use it.
 - [ ] Verify that SSH service only uses port 4242.
@@ -119,7 +119,7 @@ If on restart, the hostname has not been updated, the evaluation stops here.
 ## Monitoring Script
 
 - [ ] Ask how script works and inspect the code.
-- [ ] Script content in monitoring .sh
+- [ ] Script content is in monitoring .sh
 	`cd /usr/local/bin && nano monitoring.sh`
 - [ ] What is cron?
 - [ ] How does the script run every 10 minutes from when the server starts?
