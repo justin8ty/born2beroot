@@ -287,7 +287,18 @@ Obtain signature in sha1 format:
 
 ## Specifications
 
+Hostname, Users, Groups:
+
 ![alt text](<Screenshot 2024-07-22 185140.png>)
+
+Password Policies:
+
 ![alt text](<Screenshot 2024-07-22 185218.png>)
+
+Sudo Policies:
+
 ![alt text](<Screenshot 2024-07-22 185229.png>)
+
+Script:
+
 ![alt text](<Screenshot 2024-07-22 185248.png>)
