@@ -12,19 +12,21 @@ vcpu=$(grep "processor" /proc/cpuinfo | wc -l)
 
 # RAM Usage
 
-tram=$(free -m | awk '$1 == "Mem:" {print $2}')
-uram=$(free -m | awk '$1 == "Mem:" {print $3}')
-pram=$(free | awk '$1 == "Mem:" {printf("%.2f"), $3/$2*100}')
+tram=$(free --mega | awk '$1 == "Mem:" {print $2}')
+uram=$(free --mega | awk '$1 == "Mem:" {print $3}')
+pram=$(free --mega | awk '$1 == "Mem:" {printf("%.2f"), $3/$2*100}')
 
 # Disk Usage
 
-tdisk=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{td += $2} END {print td}')
+tdisk=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{td += $2} END {printf ("%.1fGb\n"), td/1024}')
 udisk=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{ud += $3} END {print ud}')
-pdisk=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{td += $2} {ud += $3} END {printf("%d"), ud/td*100}')
+pdisk=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{ud += $3} {td += $2} END {printf("%d"), ud/td*100}')
 
 # CPU Load
 
-cpul=$(top -bn1 | grep "%Cpu" | awk '{printf("%.1f%%"), $2 + $4}')
+cpuidle=$(vmstat 1 2 | tail -1 | awk '{printf $15}')
+cpucalc=$(expr 100 - $cpuidle)
+cpul=$(printf "%.1f" $cpucalc)
 
 # Last Boot
 
@@ -36,7 +38,7 @@ lvmu=$(if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]; then echo yes; else echo no; 
 
 # TCP Connections
 
-ctcp=$(ss -Ht state established | wc -l)
+tcpc=$(ss -ta | grep ESTAB | wc -l)
 
 # User Log
 
@@ -58,10 +60,11 @@ wall "  Architecture: $arch
         vCPU: $vcpu
         Memory Usage: $uram/${tram}MB ($pram%)
         Disk Usage: $udisk/${tdisk} ($pdisk%)
-        CPU load: $cpul
+        CPU load: $cpul%
         Last boot: $lboot
         LVM use: $lvmu
-        Connections TCP: $ctcp ESTABLISHED
+        Connections TCP: $tcpc ESTABLISHED
         User log: $ulog
         Network: IP $ip ($mac)
         Sudo: $ncmd cmd"
+

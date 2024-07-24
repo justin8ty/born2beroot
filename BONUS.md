@@ -49,7 +49,7 @@ Test with host browser: http://localhost:8080
 ### Test Lighttpd with PHP
 
 ```
-nano /var/www/html/info.php
+sudo nano /var/www/html/info.php
 ```
 
 Append these lines to `info.php`:
