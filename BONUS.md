@@ -1,6 +1,6 @@
 # WordPress Server (LLMP Stack)
 
-We will locally host a WordPress server.
+We will host a local WordPress server using LLMP stack.
 
 ![alt text](assets/localhost.png)
 
@@ -12,7 +12,7 @@ A scripting language.
 sudo apt install php php-cgi php-mysql -y
 ```
 
-Stop Apache2:
+Stop Apache2 (PHP dependency):
 
 ```
 systemctl status apache2
