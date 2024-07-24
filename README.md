@@ -12,11 +12,11 @@ Set storage to 12GB, or 30GB for bonus.
 
 Create partitions:
 
-![alt text](image.png)
+![alt text](assets/image.png)
 
 Configure mounts and sizes:
 
-![alt text](2024-07-22_050900_proc.jpg)
+![alt text](assets/2024-07-22_050900_proc.jpg)
 
 Configure filesystem:
 
@@ -30,7 +30,7 @@ Configure filesystem:
 lsblk
 ```
 
-![alt text](<Screenshot 2024-07-23 022513.png>)
+![alt text](<assets/Screenshot 2024-07-23 022513.png>)
 
 ### Install Sudo
 
@@ -132,8 +132,6 @@ touch sudo.log
 | `Defaults requiretty`            | Requires sudo to be run from a terminal.                |
 | `Defaults secure_path=""`        | Excludes specified paths from sudo.                     |
 
-![alt text](<Screenshot 2024-07-23 022649.png>)
-
 ### Configure Password Policies
 
 ```
@@ -152,16 +150,18 @@ Age Policies:
 
 Strength Policies:
 
-| Policies         | Description                                                                                    |
-|------------------|------------------------------------------------------------------------------------------------|
-| minlen=10        | The minimum characters a password must contain.                                                |
-| ucredit=-1       | Password must contain at least 1 capital letter. The `-` sign indicates a minimum requirement. |
-| dcredit=-1       | Password must contain at least 1 digit.                                                        |
-| lcredit=-1       | Password must contain at least 1 lowercase letter.                                             |
-| maxrepeat=3      | Password cannot have the same character repeated 3 consecutive times.                          |
-| reject_username  | Password cannot contain the username within itself.                                            |
-| difok=7          | Password must contain at least 7 different characters from the last password.                  |
-| enforce_for_root | Password policy will be enforced for the root user.                                            |
+The `-` sign indicates a minimum requirement.
+
+| Policies         | Description                                                                   |
+|------------------|-------------------------------------------------------------------------------|
+| minlen=10        | The minimum characters a password must contain.                               |
+| ucredit=-1       | Password must contain at least 1 capital letter.                              |
+| dcredit=-1       | Password must contain at least 1 digit.                                       |
+| lcredit=-1       | Password must contain at least 1 lowercase letter.                            |
+| maxrepeat=3      | Password cannot have the same character repeated 3 consecutive times.         |
+| reject_username  | Password cannot contain the username within itself.                           |
+| difok=7          | Password must contain at least 7 different characters from the last password. |
+| enforce_for_root | Password policy will be enforced for the root user.                           |
 
 ### Monitoring Script
 
@@ -237,24 +237,24 @@ An address is a unique identifier for devices on a network.
 
 ![alt text](image-1.png)
 
-| Name     | Description                                                                 |
-|----------|---------------------------------------------------------------------------- |
-| `/bin`   | Essential command binaries, contains `ls`, `cp`, `mv`, etc.                 |
-| `/sbin`  | Essential superuser binaries, contains `mount`, `deluser`, etc.             |
-| `/lib`   | Shared libraries and kernel modules.                                        |
-| `/usr`   | Secondary hierarchy, contains user programs and data.                       |
-| `/etc`   | System-wide configuration files.                                            |
-| `/home`  | User home directories.                                                      |
-| `/boot`  | Files used during the boot process.                                         |
-| `/dev`   | Device files representing hardware devices.                                 |
-| `/sys`   | Device files providing a gateway for direct device interactions.            |
-| `/opt`   | Optional software packages.                                                 |
-| `/var`   | Variable system files frequently changed, such as logs and temporary files. |
-| `/tmp`   | Temporary files, won't be persisted between reboots.                        |
-| `/proc`  | Virtual filesystem to keep track of running processes.                      |
-| `/media` | Mount points for removable media.                                           |
-| `/mnt`   | Temporary mount point for filesystems.                                      |
-| `/srv`   | Contains data from servers.                                                 |
+| Name     | Description                                                          |
+|----------|----------------------------------------------------------------------|
+| `/bin`   | Essential command binaries, contains `ls`, `cp`, `mv`, etc.          |
+| `/sbin`  | Essential superuser binaries, contains `mount`, `deluser`, etc.      |
+| `/lib`   | Shared libraries and kernel modules.                                 |
+| `/usr`   | Secondary hierarchy, contains user programs and data.                |
+| `/etc`   | System-wide configuration files.                                     |
+| `/home`  | User home directories.                                               |
+| `/boot`  | Files used during the boot process.                                  |
+| `/dev`   | Device files representing hardware devices.                          |
+| `/sys`   | Device files providing a gateway for direct device interactions.     |
+| `/opt`   | Optional software packages.                                          |
+| `/var`   | Variable files frequently changed, such as logs and temporary files. |
+| `/tmp`   | Temporary files, won't be persisted between reboots.                 |
+| `/proc`  | Virtual filesystem to keep track of running processes.               |
+| `/media` | Mount points for removable media.                                    |
+| `/mnt`   | Temporary mount point for filesystems.                               |
+| `/srv`   | Contains data from servers.                                          |
 
 `/usr` subdirectories:
 
@@ -299,7 +299,8 @@ Hostname, Users, Groups:
 
 Password Policies:
 
-![alt text](<Screenshot 2024-07-22 185218.png>)
+![alt text](image-2.png)
+![alt text](image-3.png)
 
 Sudo Policies:
 
