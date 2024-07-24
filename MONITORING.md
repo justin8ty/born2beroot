@@ -380,5 +380,3 @@ $ journalctl _COMM=sudo
 Jul 24 10:20:10 myhost sudo[1234]: COMMAND=/usr/bin/apt update
 Jul 24 10:21:45 myhost sudo[1235]: COMMAND=/usr/bin/apt upgrade
 ```
-
-Each of these command outputs provides raw data that `awk`, `grep`, and other tools process to generate summarized or formatted information.
