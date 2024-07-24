@@ -69,6 +69,13 @@ sudo nano /etc/ssh/sshd_config
 sudo service ssh restart
 ```
 
+Edit the following lines:
+
+```
+Port 4242
+PermitRootLogin no
+```
+
 For `permitrootlogin`:
 
 | Option              | Description                                    |
@@ -97,7 +104,7 @@ sudo apt install ufw -y
 sudo ufw enable
 sudo ufw allow ssh
 sudo ufw allow 4242
-sudo ufw status
+sudo ufw status numbered
 ```
 
 **Iptables <-> UFW Examples**
@@ -142,26 +149,26 @@ sudo nano /etc/pam.d/common-password
 
 Age Policies:
 
-| Policies      | Description                            |
-|---------------|----------------------------------------|
-| PASS_MAX_DAYS | The max days till password expiration. |
-| PASS_MIN_DAYS | The min days till password change.     |
-| PASS_WARN_AGE | The days till password warning.        |
+| Policies         | Description                            |
+|------------------|----------------------------------------|
+| PASS_MAX_DAYS 30 | The max days till password expiration. |
+| PASS_MIN_DAYS 2  | The min days till password change.     |
+| PASS_WARN_AGE 7  | The days till password warning.        |
 
 Strength Policies:
 
 The `-` sign indicates a minimum requirement.
 
-| Policies         | Description                                                                   |
-|------------------|-------------------------------------------------------------------------------|
-| minlen=10        | The minimum characters a password must contain.                               |
-| ucredit=-1       | Password must contain at least 1 capital letter.                              |
-| dcredit=-1       | Password must contain at least 1 digit.                                       |
-| lcredit=-1       | Password must contain at least 1 lowercase letter.                            |
-| maxrepeat=3      | Password cannot have the same character repeated 3 consecutive times.         |
-| reject_username  | Password cannot contain the username within itself.                           |
-| difok=7          | Password must contain at least 7 different characters from the last password. |
-| enforce_for_root | Password policy will be enforced for the root user.                           |
+| Policies         | Description                                                                |
+|------------------|----------------------------------------------------------------------------|
+| minlen=10        | The minimum characters a password must have.                               |
+| ucredit=-1       | Password must have at least 1 capital letter.                              |
+| dcredit=-1       | Password must have at least 1 digit.                                       |
+| lcredit=-1       | Password must have at least 1 lowercase letter.                            |
+| maxrepeat=3      | Password cannot have the same character repeated 3 consecutive times.      |
+| reject_username  | Password cannot have the username within itself.                           |
+| difok=7          | Password must have at least 7 different characters from the last password. |
+| enforce_for_root | Password policy will be enforced for the root user.                        |
 
 ### Monitoring Script
 
