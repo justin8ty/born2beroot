@@ -36,8 +36,6 @@ sudo systemctl status lighttpd
 
 Add port forwarding for 8080 to 80 in VM >> Settings >> Network >> Port Forwarding.
 
-Test with host browser: http://localhost:8080
-
 Enable Lighttpd FastCGI module:
 
 ```
@@ -45,6 +43,8 @@ sudo lighty-enable-mod fastcgi
 sudo lighty-enable-mod fastcgi-php
 sudo service lighttpd force-reload
 ```
+
+Test with host browser: http://localhost:8080
 
 ### Test Lighttpd with PHP
 

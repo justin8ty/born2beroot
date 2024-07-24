@@ -83,18 +83,6 @@ For `permitrootlogin`:
 | `prohibit-password` | Allows root login via keys, but not passwords. |
 | `no`                | Disables root login entirely.                  |
 
-From this point onward, we can use SSH to configure the VM from host machine.
-
-![alt text](<assets/Screenshot 2024-07-24 031049.png>)
-
-Connect with SSH:
-
-```
-ssh jin-tan@localhost -p 4242
-```
-
-exit or Ctrl+D to disconnect.
-
 ### Configure UFW
 
 A CLI frontend for configuring iptables.
@@ -118,6 +106,20 @@ Deny IP:
 
 `iptables -A INPUT -s 192.168.1.100 -j DROP`
 `sudo ufw deny from 192.168.1.100`
+
+### Connect to SSH
+
+Add port forwarding for 4242 to 4242 in VM >> Settings >> Network >> Port Forwarding.
+
+From this point onward, we can use SSH to configure the VM from host machine.
+
+```
+ssh jin-tan@localhost -p 4242
+```
+
+exit or Ctrl+D to disconnect.
+
+![alt text](<assets/Screenshot 2024-07-24 031049.png>)
 
 ### Configure Sudo
 
