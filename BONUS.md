@@ -2,7 +2,7 @@
 
 We will locally host a WordPress server.
 
-![alt text](<assets/Screenshot 2024-07-23 220606.png>)
+![alt text](assets/localhost.png)
 
 ## Install PHP
 
@@ -145,8 +145,6 @@ Go to `http://localhost` and finish setup.
 
 A protocol to transfer files between computers on a network.
 
-![alt text](<assets/Screenshot 2024-07-23 225503.png>)
-
 ```
 sudo apt install ftp vsftpd -y
 sudo ufw allow 21
@@ -161,6 +159,8 @@ local_enable=YES
 write_enable=YES
 ftpd_banner=Welcome to blah FTP service.
 ```
+
+![alt text](<assets/Screenshot 2024-07-23 225503.png>)
 
 ## Create User
 

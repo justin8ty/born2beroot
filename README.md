@@ -180,10 +180,18 @@ This script collects various system information and displays it using the `wall`
 cd /usr/local/bin/
 touch monitoring.sh
 chmod 777 monitoring.sh
+sudo nano monitoring.sh
 sh monitoring.sh
 ```
 
-![alt text](<assets/Screenshot 2024-07-24 031049.png>)
+To stress-test the system for CPU load:
+
+```
+sudo apt install stress -y
+stress --cpu 1 --timeout 60
+```
+
+![alt text](assets/image-4.png)
 
 Details in `MONITORING.md`.
 
