@@ -218,6 +218,10 @@ Crontab Format:
 Min Hour Day_Of_Month Month Day_Of_Week Cmd
 ```
 
+## Bonus: WordPress + FTP Server
+
+For the bonus tutorial, refer to: [](./BONUS.md)
+
 ## Signature
 
 Store VM in `~/VirtualBox VMs/`
