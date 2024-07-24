@@ -20,7 +20,7 @@ Configure mounts and sizes:
 
 Configure filesystem:
 
-![alt text](assets/VirtualBox_Born2beRoot_22_07_2024_15_00_04.png)
+![alt text](assets/22_07_2024_15_00_04.png)
 
 ## Setup VM
 
@@ -30,7 +30,7 @@ Configure filesystem:
 lsblk
 ```
 
-![alt text](assets/<Screenshot 2024-07-23 022513.png>)
+![alt text](<assets/Screenshot 2024-07-23 022513.png>)
 
 ### Install Sudo
 
@@ -57,7 +57,7 @@ getent group user42
 getent group sudo
 ```
 
-![alt text](assets/<Screenshot 2024-07-23 022446.png>)
+![alt text](<assets/Screenshot 2024-07-23 022446.png>)
 
 ### Configure SSH
 
@@ -78,7 +78,7 @@ For `permitrootlogin`:
 
 From this point onward, we can use SSH to configure the VM from host machine.
 
-![alt text](assets/<Screenshot 2024-07-22 192010.png>)
+![alt text](<assets/Screenshot 2024-07-24 031049.png>)
 
 Connect with SSH:
 
@@ -174,7 +174,7 @@ chmod 777 monitoring.sh
 sh monitoring.sh
 ```
 
-![alt text](assets/<Screenshot 2024-07-24 031049.png>)
+![alt text](<assets/Screenshot 2024-07-24 031049.png>)
 
 Details in `MONITORING.md`.
 
@@ -215,7 +215,7 @@ A port is a virtual point where network connections start and end.
 
 An address is a unique identifier for devices on a network.
 
-![alt text](assets/<Screenshot 2024-07-23 221426.png>)
+![alt text](<assets/Screenshot 2024-07-23 221426.png>)
 
 `127.0.0.1` or localhost is a loopback address, used by the computer itself only.
 
@@ -295,7 +295,7 @@ An address is a unique identifier for devices on a network.
 
 Hostname, Users, Groups:
 
-![alt text](assets/<Screenshot 2024-07-22 185140.png>)
+![alt text](<assets/Screenshot 2024-07-22 185140.png>)
 
 Password Policies:
 

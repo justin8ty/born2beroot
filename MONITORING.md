@@ -1,7 +1,5 @@
 # Monitoring Explained
 
-![alt text](<Screenshot 2024-07-23 034438.png>)
-
 1. **Shebang**
    ```bash
    #!/bin/bash

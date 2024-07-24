@@ -2,7 +2,7 @@
 
 We will locally host a WordPress server.
 
-![alt text](<Screenshot 2024-07-23 220606.png>)
+![alt text](<assets/Screenshot 2024-07-23 220606.png>)
 
 ## Install PHP
 
@@ -122,7 +122,7 @@ mariadb -u jin-tan -p
 SHOW DATABASES;
 ```
 
-![alt text](<Screenshot 2024-07-23 213153.png>)
+![alt text](<assets/Screenshot 2024-07-23 213153.png>)
 
 ## Configure WordPress
 
@@ -145,7 +145,7 @@ Go to `http://localhost` and finish setup.
 
 A protocol to transfer files between computers on a network.
 
-![alt text](<Screenshot 2024-07-23 225503.png>)
+![alt text](<assets/Screenshot 2024-07-23 225503.png>)
 
 ```
 sudo apt install ftp vsftpd -y
