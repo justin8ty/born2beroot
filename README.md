@@ -330,3 +330,5 @@ Sudo Policies:
 Script:
 
 ![alt text](<assets/Screenshot 2024-07-22 185248.png>)
+
+P.S. Docker is similar to VMs, but it only isolates container processes, and uses kernel from the host. This has performance implications.
