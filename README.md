@@ -1,5 +1,7 @@
 # Born2beRoot Tutorial
 
+This is a virtual machine with a WordPress server installed.
+
 ## Install VM
 
 Folder should be in sgoinfre.
